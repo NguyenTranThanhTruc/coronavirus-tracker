@@ -9,7 +9,7 @@
         <module name="coronavirus-tracker" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11">
       <module name="coronavirus-tracker" target="11" />
     </bytecodeTargetLevel>
   </component>
