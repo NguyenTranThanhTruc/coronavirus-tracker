@@ -23,6 +23,10 @@ public class CoronaVirusDataService {
 
     private List<LocationStats> allStats = new ArrayList<>();
 
+    public List<LocationStats> getAllStats() {
+        return allStats;
+    }
+
     @PostConstruct
     // run once a day
     // cron " second minus hour day month year"
@@ -48,8 +52,10 @@ public class CoronaVirusDataService {
             LocationStats locationStats = new LocationStats();
             locationStats.setState(record.get("Province/State"));
             locationStats.setCountry(record.get("Country/Region"));
-            locationStats.setLatesTotalCases(Integer.parseInt(record.get(record.size() - 1)));
-            System.out.println(locationStats);
+            int latestDay = Integer.parseInt(record.get(record.size() - 1));
+            int prevDay = Integer.parseInt(record.get(record.size() - 2));
+            locationStats.setLatesTotalCases(latestDay);
+            locationStats.setDiffFromPreDay(latestDay-prevDay);
             newLocationStats.add(locationStats);
         }
         this.allStats = newLocationStats;
